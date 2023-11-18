@@ -1,32 +1,35 @@
 from tkinter import *
 from tkinter import messagebox
 from random import randint, choice, shuffle
+import pyperclip
 # ---------------------_GENERATE A PASSWORD_---------------------
 
-letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-           'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-           'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-nr_letters = randint(8, 10)
-nr_numbers = randint(2, 4)
-nr_symbols = randint(2, 4)
+def generate_password():
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+               'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-password_letters = [choice(letters) for x in range(nr_letters)]
-password_numbers = [choice(numbers) for x in range(nr_numbers)]
-password_symbols = [choice(symbols) for x in range(nr_symbols)]
+    nr_letters = randint(8, 10)
+    nr_numbers = randint(2, 4)
+    nr_symbols = randint(2, 4)
 
-password_list = password_letters+password_numbers+password_symbols
+    password_letters = [choice(letters) for x in range(nr_letters)]
+    password_numbers = [choice(numbers) for x in range(nr_numbers)]
+    password_symbols = [choice(symbols) for x in range(nr_symbols)]
 
-shuffle(password_list)
+    password_list = password_letters+password_numbers+password_symbols
 
-generated_password = ''.join(password_list)
+    shuffle(password_list)
 
-
-def generate_password(password=generated_password):
-    password_entry.insert(END, password)
+    generated_password = ''.join(password_list)
+    password_entry.insert(END, generated_password)
+    pyperclip.copy(generated_password)
 # ---------------------_ADDING USER'S PASSWORD TO THE FILE_---------------------
+
+
 def add_password():
     website_name = website_entry.get()
     email_name = email_entry.get()
@@ -46,6 +49,8 @@ def add_password():
             messagebox.showinfo(title='Info', message='Please correct your data before saving it')
 
 # ---------------------_CREATING A WINDOW_---------------------
+
+
 window = Tk()
 window.config(padx=50, pady=50)
 window.title('Your password manager')
