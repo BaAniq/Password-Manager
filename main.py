@@ -1,13 +1,40 @@
 from tkinter import *
 from tkinter import messagebox
 
+# ---------------------_GENERATE A PASSWORD_---------------------
+import random
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+           'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+           'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
+nr_letters = random.randint(8, 10)
+nr_numbers = random.randint(2, 4)
+nr_symbols = random.randint(2, 4)
+
+password_list = []
+for element in range(nr_letters):
+    password_list.append(random.choice(letters))
+
+for element in range(nr_numbers):
+    password_list.append(random.choice(numbers))
+
+for element in range(nr_symbols):
+    password_list.append(random.choice(symbols))
+
+random.shuffle(password_list)
+print(password_list)
+generated_password = ''.join(password_list)
+print(generated_password)
+
+# ---------------------_ADDING USER'S PASSWORD TO THE FILE_---------------------
 def add_password():
     website_name = website_entry.get()
     email_name = email_entry.get()
     password_ = password_entry.get()
     if len(website_name) == 0 or len(email_name) == 0 or password_ == 0:
-        messagebox.showinfo(title='Empty fields', message="Please don't leave any fields empty" )
+        messagebox.showinfo(title='Empty fields', message="Please don't leave any fields empty")
     else:
         do_save = messagebox.askokcancel(title='Data to save', message=f'Do you want to save this data: \nWebsite:'
                                                                        f' {website_name}\nEmail: {email_name}\n'
@@ -20,7 +47,7 @@ def add_password():
         else:
             messagebox.showinfo(title='Info', message='Please correct your data before saving it')
 
-
+# ---------------------_CREATING A WINDOW_---------------------
 window = Tk()
 window.config(padx=50, pady=50)
 window.title('Your password manager')
