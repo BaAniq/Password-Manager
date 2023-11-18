@@ -7,6 +7,8 @@ def add_password():
     password_ = password_entry.get()
     with open('Data.txt', 'a+') as data_storage:
         data_storage.write(f'{website_name} | {email_name} | {password_}\n')
+    website_entry.delete(0, END)
+    password_entry.delete(0, END)
 
 
 window = Tk()
