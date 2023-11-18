@@ -1,14 +1,24 @@
 from tkinter import *
+from tkinter import messagebox
 
 
 def add_password():
     website_name = website_entry.get()
     email_name = email_entry.get()
     password_ = password_entry.get()
-    with open('Data.txt', 'a+') as data_storage:
-        data_storage.write(f'{website_name} | {email_name} | {password_}\n')
-    website_entry.delete(0, END)
-    password_entry.delete(0, END)
+    if len(website_name) == 0 or len(email_name) == 0 or password_ == 0:
+        messagebox.showinfo(title='Empty fields', message="Please don't leave any fields empty" )
+    else:
+        do_save = messagebox.askokcancel(title='Data to save', message=f'Do you want to save this data: \nWebsite:'
+                                                                       f' {website_name}\nEmail: {email_name}\n'
+                                                                       f'Password: {password_}')
+        if do_save:
+            with open('Data.txt', 'a+') as data_storage:
+                data_storage.write(f'{website_name} | {email_name} | {password_}\n')
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
+        else:
+            messagebox.showinfo(title='Info', message='Please correct your data before saving it')
 
 
 window = Tk()
