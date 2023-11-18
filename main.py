@@ -24,10 +24,12 @@ for element in range(nr_symbols):
     password_list.append(random.choice(symbols))
 
 random.shuffle(password_list)
-print(password_list)
-generated_password = ''.join(password_list)
-print(generated_password)
 
+generated_password = ''.join(password_list)
+
+
+def generate_password(password=generated_password):
+    password_entry.insert(END, password)
 # ---------------------_ADDING USER'S PASSWORD TO THE FILE_---------------------
 def add_password():
     website_name = website_entry.get()
@@ -78,7 +80,7 @@ email_entry.insert(END, string='basia@gmail.com')
 password_entry = Entry(width=28)
 password_entry.grid(row=4, column=2)
 
-generate_password_button = Button(text='Generate Password')
+generate_password_button = Button(text='Generate Password', command=generate_password)
 generate_password_button.grid(row=4, column=3)
 
 add_button = Button(text='Add', width=46, command=add_password)
