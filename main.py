@@ -1,9 +1,26 @@
 from tkinter import *
 
+
+def add_password():
+    website_name = website_entry.get()
+    email_name = email_entry.get()
+    password_ = password_entry.get()
+    data_to_add = [website_name, email_name, password_]
+    mark = ' | '
+    with open('Data.txt', 'a+') as data_storage:
+        n = 1
+        for data in data_to_add:
+            data_storage.write(data)
+            if n == 3:
+                data_storage.write('\n')
+            else:
+                data_storage.write(mark)
+            n += 1
+
+
 window = Tk()
 window.config(padx=50, pady=50)
 window.title('Your password manager')
-# window.minsize(height=300, width=500)
 
 set_background_image = Canvas(width=200, height=200)
 image_logo = PhotoImage(file='logo.png')
@@ -26,6 +43,7 @@ website_entry.focus()
 
 email_entry = Entry(width=46)
 email_entry.grid(row=3, column=2, columnspan=2)
+email_entry.insert(END, string='basia@gmail.com')
 
 password_entry = Entry(width=28)
 password_entry.grid(row=4, column=2)
@@ -33,7 +51,7 @@ password_entry.grid(row=4, column=2)
 generate_password_button = Button(text='Generate Password')
 generate_password_button.grid(row=4, column=3)
 
-add_button = Button(text='Add', width=46)
+add_button = Button(text='Add', width=46, command=add_password)
 add_button.grid(row=5, column=2, columnspan=2)
 
 window.mainloop()
