@@ -5,17 +5,8 @@ def add_password():
     website_name = website_entry.get()
     email_name = email_entry.get()
     password_ = password_entry.get()
-    data_to_add = [website_name, email_name, password_]
-    mark = ' | '
     with open('Data.txt', 'a+') as data_storage:
-        n = 1
-        for data in data_to_add:
-            data_storage.write(data)
-            if n == 3:
-                data_storage.write('\n')
-            else:
-                data_storage.write(mark)
-            n += 1
+        data_storage.write(f'{website_name} | {email_name} | {password_}\n')
 
 
 window = Tk()
